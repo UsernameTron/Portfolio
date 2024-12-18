@@ -81,11 +81,11 @@ st.markdown("---")
 st.subheader("🎧 Listen to a Summary of My Portfolio")
 st.write("Experience a quick audio overview of my career highlights and achievements:")
 
-audio_data = load_file(FILES["audio_summary"])
-if audio_data:
-    st.audio(audio_data, format="audio/mp3")
-else:
-    st.warning("Audio file not found.")
+# Use the Google Drive streaming link
+google_drive_audio_link = "https://drive.google.com/uc?id=1P1kJOPg25kTX1IQSc0_y9OUmir6vvy1X"
+
+# Stream the audio
+st.audio(google_drive_audio_link, format="audio/mp3")
 
 # --- Certifications Section ---
 st.markdown("## 🎓 Certifications")
