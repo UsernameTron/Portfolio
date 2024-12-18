@@ -47,10 +47,14 @@ col1, col2 = st.columns([1, 2])
 profile_pic_data = load_file(FILES["profile_pic"])
 if profile_pic_data:
     with col1:
-        profile_pic = Image.open(FILES["profile_pic"])
-        st.image(profile_pic, caption="C. Pete Connor", use_container_width=True)
+        try:
+            profile_pic = Image.open(pd.io.common.BytesIO(profile_pic_data))
+            st.image(profile_pic, caption="C. Pete Connor", use_container_width=True)
+        except Exception as e:
+            st.error(f"Error displaying profile picture: {e}")
 else:
-    st.warning("Profile picture not found.")
+    with col1:
+        st.warning("Profile picture not found.")
 
 # Description and Resume Download
 with col2:
