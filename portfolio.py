@@ -1,6 +1,6 @@
 import streamlit as st
-from PIL import Image, UnidentifiedImageError  # Ensure this includes UnidentifiedImageError
-from io import BytesIO  # Required for handling binary file data
+from PIL import Image, UnidentifiedImageError
+from io import BytesIO
 import os
 import base64
 import matplotlib.pyplot as plt
@@ -18,13 +18,14 @@ FILES = {
 
 # --- Helper Functions ---
 def load_file(file_path):
-    """Load a file if it exists, or return None."""
-    try:
-        with open(file_path, "rb") as f:
-            return f.read()
-    except FileNotFoundError:
+    """
+    Load a file from the same directory or raise an error if not found.
+    """
+    if not os.path.exists(file_path):
         st.error(f"File not found: {file_path}")
         return None
+    with open(file_path, "rb") as f:
+        return BytesIO(f.read())  # Return as BytesIO for compatibility
 
 def display_bar_chart(title, data, xlabel, ylabel):
     """Create a horizontal bar chart using matplotlib."""
@@ -51,15 +52,14 @@ with tab1:
     # Display Profile Picture
     profile_pic_data = load_file(FILES["profile_pic"])
     if profile_pic_data:
-        with col1:
-            try:
-                profile_pic = Image.open(BytesIO(profile_pic_data))
-                st.image(profile_pic, caption="C. Pete Connor")  # Removed `use_container_width`
-            except UnidentifiedImageError:
-                st.error("Uploaded profile picture is not a valid image file.")
+        try:
+            profile_pic = Image.open(profile_pic_data)
+            with col1:
+                st.image(profile_pic, caption="C. Pete Connor")
+        except UnidentifiedImageError:
+            st.error("Uploaded profile picture is not a valid image file.")
     else:
-        with col1:
-            st.warning("Profile picture not found.")
+        st.warning("Profile picture not found.")
 
     # Description and Resume Download
     with col2:
@@ -73,8 +73,8 @@ with tab1:
         if resume_data:
             st.download_button(
                 label="📄 Download My Resume Highlights",
-                data=resume_data,
-                file_name="resume_visualization.pdf",
+                data=resume_data.getvalue(),
+                file_name="cv_cpeteconnor.pdf",
                 mime="application/pdf",
             )
         else:
@@ -87,85 +87,7 @@ with tab1:
 
     # Use the Dropbox streaming link
     dropbox_audio_link = "https://www.dropbox.com/scl/fi/rimzqokmz986bbqzz24p3/Celebrity-Endorsement.mp3?rlkey=6ccxqt2ovtgw9ajeac7fksfai&raw=1"
-
-    # Stream the audio
     st.audio(dropbox_audio_link, format="audio/mp3")
-
-    # Certifications Section
-    st.markdown("## 🎓 Certifications")
-    certifications_data = [
-        {"Category": "AI & Data Science", "Value": 4},
-        {"Category": "Leadership & Management", "Value": 4},
-        {"Category": "Productivity & Personal Development", "Value": 3},
-        {"Category": "Customer Experience", "Value": 1},
-        {"Category": "Technical Skills", "Value": 2},
-        {"Category": "Process Improvement", "Value": 2},
-        {"Category": "Public Speaking", "Value": 1},
-        {"Category": "Public Recognition", "Value": 1},
-    ]
-    display_bar_chart("Certifications by Category", certifications_data, xlabel="Category", ylabel="Certifications Count")
-
-    # Key Projects and Achievements
-    st.markdown("## 🏆 Key Projects and Achievements")
-    projects_data = [
-        {"Category": "Feedback System Implementation", "Value": 93},
-        {"Category": "CX Roadmap Development", "Value": 20},
-        {"Category": "KPI Tracking", "Value": 25},
-        {"Category": "SOP Documentation", "Value": 10},
-        {"Category": "Cross-Functional Collaboration", "Value": 10},
-    ]
-    display_bar_chart("Key Projects and Achievements", projects_data, xlabel="Projects", ylabel="Impact (%)")
-
-    # Technical Proficiencies
-    st.markdown("## 💻 Technical Proficiencies")
-    tech_proficiencies = {
-        "AI & Machine Learning": "Python, TensorFlow, scikit-learn",
-        "CRM & CX Platforms": "Zendesk, Totango, RingCentral, Salesforce",
-        "Data Visualization": "Power BI, Tableau, Excel, Google Sheets",
-        "Database Management": "SQL",
-        "Communication Tools": "Slack, Microsoft Teams, Zoom",
-        "Project Management": "Asana, Trello, Jira"
-    }
-    cols = st.columns(2)
-    for i, (category, tools) in enumerate(tech_proficiencies.items()):
-        with cols[i % 2]:
-            st.markdown(f"**{category}**")
-            st.write(tools)
-
-    # Testimonials Section
-    st.markdown("## 💬 Professional Recommendations")
-    testimonials = [
-        {"name": "Darren Prine", "title": "CX Solutions Guru", "comment": "Pete's expertise in AI-driven analytics and predictive modeling has delivered millions in revenue by reducing churn and boosting NPS."},
-        {"name": "Michele Crocker", "title": "Digital Transformation Expert", "comment": "Pete connects people, processes, and technology to drive measurable results. A true leader with a growth mindset."},
-        {"name": "John Jarvis", "title": "VP Client Services", "comment": "Pete builds high-performing teams, identifies issues quickly, and enhances processes for better efficiency."},
-        {"name": "Angela McKenzie", "title": "Surgery Scheduler", "comment": "One of the most supportive and talented leaders I’ve worked under."},
-        {"name": "Shawn Foley", "title": "Healthcare Executive", "comment": "Pete is a consummate professional—great leader with humor and results-driven attitude."},
-        {"name": "Tina M. Martino", "title": "Director, Healogics", "comment": "Pete’s profound knowledge of call center operations and technology sets him apart as a top asset."},
-    ]
-    cols = st.columns(2)
-    for i, t in enumerate(testimonials):
-        with cols[i % 2]:
-            st.markdown(f"**{t['name']}** - *{t['title']}*")
-            st.info(f"_{t['comment']}_")
-
-# --- Tab 2: Graphic Arts ---
-with tab2:
-    st.title("🎨 Graphic Arts Showcase")
-    st.write("Welcome to my Graphic Arts portfolio. Here are some of my favorite designs:")
-    
-    # Showcase Images
-    images = [
-        {"title": "Design 1", "file": "design1.png"},
-        {"title": "Design 2", "file": "design2.png"},
-        {"title": "Design 3", "file": "design3.png"}
-    ]
-    
-    for img in images:
-        if os.path.exists(img["file"]):
-            st.subheader(img["title"])
-            st.image(img["file"], caption=img["title"], use_column_width=True)
-        else:
-            st.warning(f"Image not found: {img['file']}")
 
 # --- Footer ---
 st.markdown("---")
