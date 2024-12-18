@@ -1,5 +1,6 @@
 import streamlit as st
-from PIL import Image
+from PIL import Image, UnidentifiedImageError  # Ensure this includes UnidentifiedImageError
+from io import BytesIO  # Required for handling binary file data
 import os
 import base64
 import matplotlib.pyplot as plt
@@ -48,10 +49,10 @@ profile_pic_data = load_file(FILES["profile_pic"])
 if profile_pic_data:
     with col1:
         try:
-            profile_pic = Image.open(pd.io.common.BytesIO(profile_pic_data))
+            profile_pic = Image.open(BytesIO(profile_pic_data))
             st.image(profile_pic, caption="C. Pete Connor", use_container_width=True)
-        except Exception as e:
-            st.error(f"Error displaying profile picture: {e}")
+        except UnidentifiedImageError:
+            st.error("Uploaded profile picture is not a valid image file.")
 else:
     with col1:
         st.warning("Profile picture not found.")
