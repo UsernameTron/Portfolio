@@ -2,3 +2,7 @@
 .env
 Library/
 __pycache__/
+assets/
+*.log
+*.tmp
+*.swp
