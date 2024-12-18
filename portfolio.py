@@ -50,7 +50,7 @@ if profile_pic_data:
     with col1:
         try:
             profile_pic = Image.open(BytesIO(profile_pic_data))
-            st.image(profile_pic, caption="C. Pete Connor", use_container_width=True)
+            st.image(profile_pic, caption="C. Pete Connor")  # Removed `use_container_width`
         except UnidentifiedImageError:
             st.error("Uploaded profile picture is not a valid image file.")
 else:
