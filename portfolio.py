@@ -81,11 +81,11 @@ st.markdown("---")
 st.subheader("🎧 Listen to a Summary of My Portfolio")
 st.write("Experience a quick audio overview of my career highlights and achievements:")
 
-# Use the Google Drive streaming link
-google_drive_audio_link = "https://drive.google.com/uc?id=1P1kJOPg25kTX1IQSc0_y9OUmir6vvy1X"
+# Use the Dropbox streaming link
+dropbox_audio_link = "https://www.dropbox.com/scl/fi/rimzqokmz986bbqzz24p3/Celebrity-Endorsement.mp3?rlkey=6ccxqt2ovtgw9ajeac7fksfai&raw=1"
 
 # Stream the audio
-st.audio(google_drive_audio_link, format="audio/mp3")
+st.audio(dropbox_audio_link, format="audio/mp3")
 
 # --- Certifications Section ---
 st.markdown("## 🎓 Certifications")
