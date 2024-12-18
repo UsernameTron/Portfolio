@@ -9,16 +9,19 @@ import pandas as pd
 st.set_page_config(page_title="Digital Portfolio | C. Pete Connor", page_icon="🏆", layout="wide")
 
 # --- File Paths ---
-profile_pic_path = "assets/home/profile-pic.png"
-resume_path = "assets/home/cv_cpeteconnor.pdf"
-mp3_path = "assets/home/Celebrity Endorsement.mp3"
+FILES = {
+    "profile_pic": "profile-pic.png",         # Root directory
+    "resume": "cv_cpeteconnor.pdf",           # Root directory
+    "audio_summary": "Celebrity Endorsement.mp3"  # Root directory
+}
 
 # --- Helper Functions ---
 def load_file(file_path):
-    """Load a file if it exists, or show an error."""
-    if os.path.exists(file_path):
-        return open(file_path, "rb").read()
-    else:
+    """Load a file if it exists, or return None."""
+    try:
+        with open(file_path, "rb") as f:
+            return f.read()
+    except FileNotFoundError:
         st.error(f"File not found: {file_path}")
         return None
 
@@ -39,22 +42,29 @@ def display_bar_chart(title, data, xlabel, ylabel):
 # --- Hero Section ---
 st.title("C. Pete Connor: Digital Portfolio")
 col1, col2 = st.columns([1, 2])
-with col1:
-    if os.path.exists(profile_pic_path):
-        profile_pic = Image.open(profile_pic_path)
+
+# Display Profile Picture
+profile_pic_data = load_file(FILES["profile_pic"])
+if profile_pic_data:
+    with col1:
+        profile_pic = Image.open(FILES["profile_pic"])
         st.image(profile_pic, caption="C. Pete Connor", use_container_width=True)
-    else:
-        st.warning("Profile picture not found.")
+else:
+    st.warning("Profile picture not found.")
+
+# Description and Resume Download
 with col2:
     st.write("""
     **Customer Experience Leader | AI Strategist | Operational Excellence**  
     Delivering innovative solutions and measurable results in customer experience and operational transformation.
     """)
     st.markdown("[📧 Email Me](mailto:cpeteconnor@gmail.com) | [🔗 LinkedIn](https://linkedin.com/in/cpeteconnor)")
-    if load_file(resume_path):
+
+    resume_data = load_file(FILES["resume"])
+    if resume_data:
         st.download_button(
             label="📄 Download My Resume Highlights",
-            data=load_file(resume_path),
+            data=resume_data,
             file_name="resume_visualization.pdf",
             mime="application/pdf",
         )
@@ -65,9 +75,12 @@ with col2:
 st.markdown("---")
 st.subheader("🎧 Listen to a Summary of My Portfolio")
 st.write("Experience a quick audio overview of my career highlights and achievements:")
-audio_data = load_file(mp3_path)
+
+audio_data = load_file(FILES["audio_summary"])
 if audio_data:
     st.audio(audio_data, format="audio/mp3")
+else:
+    st.warning("Audio file not found.")
 
 # --- Certifications Section ---
 st.markdown("## 🎓 Certifications")
