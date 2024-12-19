@@ -57,6 +57,12 @@ else:
     with col1:
         st.warning("Profile picture not found.")
 
+# Connect with Virtual Agent Section
+with col2:
+    st.markdown("### 📞 Connect with My Virtual Agent")
+    st.write("Click the phone number below to call and interact with my virtual conversational agent:")
+    st.markdown("[+1 325 666 4949](tel:+13256664949)")
+
 # Description and Resume Download
 with col2:
     st.write("""
