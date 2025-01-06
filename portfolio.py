@@ -40,115 +40,103 @@ def display_bar_chart(title, data, xlabel, ylabel):
     plt.tight_layout()
     st.pyplot(fig)
 
+# --- Tabs ---
+tab_hero, tab_certifications, tab_projects, tab_testimonials = st.tabs(
+    ["Hero Section", "Certifications", "Key Projects", "Testimonials"]
+)
+
 # --- Hero Section ---
-st.title("C. Pete Connor: Digital Portfolio")
-col1, col2 = st.columns([1, 2])
+with tab_hero:
+    st.title("C. Pete Connor: Digital Portfolio")
+    col1, col2 = st.columns([1, 2])
 
-# Display Profile Picture
-profile_pic_data = load_file(FILES["profile_pic"])
-if profile_pic_data:
-    with col1:
-        try:
-            profile_pic = Image.open(BytesIO(profile_pic_data))
-            st.image(profile_pic, caption="C. Pete Connor")  # Removed use_container_width
-        except UnidentifiedImageError:
-            st.error("Uploaded profile picture is not a valid image file.")
-else:
-    with col1:
-        st.warning("Profile picture not found.")
-
-# Connect with Virtual Agent Section
-with col2:
-    st.markdown("### 📞 Connect with My Virtual Agent")
-    st.write("Click the phone number below to call and interact with my virtual conversational agent:")
-    st.markdown("[+1 325 666 4949](tel:+13256664949)")
-
-# Description and Resume Download
-with col2:
-    st.write("""
-    **Customer Experience Leader | AI Strategist | Operational Excellence**  
-    Delivering innovative solutions and measurable results in customer experience and operational transformation.
-    """)
-    st.markdown("[📧 Email Me](mailto:cpeteconnor@gmail.com) | [🔗 LinkedIn](https://linkedin.com/in/cpeteconnor)")
-
-    resume_data = load_file(FILES["resume"])
-    if resume_data:
-        st.download_button(
-            label="📄 Download My Resume Highlights",
-            data=resume_data,
-            file_name="resume_visualization.pdf",
-            mime="application/pdf",
-        )
+    # Display Profile Picture
+    profile_pic_data = load_file(FILES["profile_pic"])
+    if profile_pic_data:
+        with col1:
+            try:
+                profile_pic = Image.open(BytesIO(profile_pic_data))
+                st.image(profile_pic, caption="C. Pete Connor")
+            except UnidentifiedImageError:
+                st.error("Uploaded profile picture is not a valid image file.")
     else:
-        st.warning("Resume file not found.")
+        with col1:
+            st.warning("Profile picture not found.")
 
-# --- MP3 Audio Section ---
-st.markdown("---")
-st.subheader("🎧 Listen to a Summary of My Portfolio")
-st.write("Experience a quick audio overview of my career highlights and achievements:")
+    # Connect with Virtual Agent Section
+    with col2:
+        st.markdown("### 📞 Connect with My Virtual Agent")
+        st.write("Click the phone number below to call and interact with my virtual conversational agent:")
+        st.markdown("[+1 325 666 4949](tel:+13256664949)")
+        st.write("""
+        **Customer Experience Leader | AI Strategist | Operational Excellence**  
+        Delivering innovative solutions and measurable results in customer experience and operational transformation.
+        """)
+        st.markdown("[📧 Email Me](mailto:cpeteconnor@gmail.com) | [🔗 LinkedIn](https://linkedin.com/in/cpeteconnor)")
 
-# Use the Dropbox streaming link
-dropbox_audio_link = "https://www.dropbox.com/scl/fi/rimzqokmz986bbqzz24p3/Celebrity-Endorsement.mp3?rlkey=6ccxqt2ovtgw9ajeac7fksfai&raw=1"
+        resume_data = load_file(FILES["resume"])
+        if resume_data:
+            st.download_button(
+                label="📄 Download My Resume Highlights",
+                data=resume_data,
+                file_name="resume_visualization.pdf",
+                mime="application/pdf",
+            )
+        else:
+            st.warning("Resume file not found.")
 
-# Stream the audio
-st.audio(dropbox_audio_link, format="audio/mp3")
+    # MP3 Audio Section
+    st.markdown("---")
+    st.subheader("🎧 Listen to a Summary of My Portfolio")
+    st.write("Experience a quick audio overview of my career highlights and achievements:")
+
+    # Use the Dropbox streaming link
+    dropbox_audio_link = "https://www.dropbox.com/scl/fi/rimzqokmz986bbqzz24p3/Celebrity-Endorsement.mp3?rlkey=6ccxqt2ovtgw9ajeac7fksfai&raw=1"
+    st.audio(dropbox_audio_link, format="audio/mp3")
 
 # --- Certifications Section ---
-st.markdown("## 🎓 Certifications")
-certifications_data = [
-    {"Category": "AI & Data Science", "Value": 4},
-    {"Category": "Leadership & Management", "Value": 4},
-    {"Category": "Productivity & Personal Development", "Value": 3},
-    {"Category": "Customer Experience", "Value": 1},
-    {"Category": "Technical Skills", "Value": 2},
-    {"Category": "Process Improvement", "Value": 2},
-    {"Category": "Public Speaking", "Value": 1},
-    {"Category": "Public Recognition", "Value": 1},
-]
-display_bar_chart("Certifications by Category", certifications_data, xlabel="Category", ylabel="Certifications Count")
+with tab_certifications:
+    st.markdown("## 🎓 Certifications")
+    certifications_data = [
+        {"Category": "AI & Data Science", "Value": 4},
+        {"Category": "Leadership & Management", "Value": 4},
+        {"Category": "Productivity & Personal Development", "Value": 3},
+        {"Category": "Customer Experience", "Value": 1},
+        {"Category": "Technical Skills", "Value": 2},
+        {"Category": "Process Improvement", "Value": 2},
+        {"Category": "Public Speaking", "Value": 1},
+        {"Category": "Public Recognition", "Value": 1},
+    ]
+    display_bar_chart("Certifications by Category", certifications_data, xlabel="Category", ylabel="Certifications Count")
 
-# --- Key Projects and Achievements ---
-st.markdown("## 🏆 Key Projects and Achievements")
-projects_data = [
-    {"Category": "Feedback System Implementation", "Value": 93},
-    {"Category": "CX Roadmap Development", "Value": 20},
-    {"Category": "KPI Tracking", "Value": 25},
-    {"Category": "SOP Documentation", "Value": 10},
-    {"Category": "Cross-Functional Collaboration", "Value": 10},
-]
-display_bar_chart("Key Projects and Achievements", projects_data, xlabel="Projects", ylabel="Impact (%)")
-
-# --- Technical Proficiencies ---
-st.markdown("## 💻 Technical Proficiencies")
-tech_proficiencies = {
-    "AI & Machine Learning": "Python, TensorFlow, scikit-learn",
-    "CRM & CX Platforms": "Zendesk, Totango, RingCentral, Salesforce",
-    "Data Visualization": "Power BI, Tableau, Excel, Google Sheets",
-    "Database Management": "SQL",
-    "Communication Tools": "Slack, Microsoft Teams, Zoom",
-    "Project Management": "Asana, Trello, Jira"
-}
-cols = st.columns(2)
-for i, (category, tools) in enumerate(tech_proficiencies.items()):
-    with cols[i % 2]:
-        st.markdown(f"**{category}**")
-        st.write(tools)
+# --- Key Projects and Achievements Section ---
+with tab_projects:
+    st.markdown("## 🏆 Key Projects and Achievements")
+    projects_data = [
+        {"Category": "Feedback System Implementation", "Value": 93},
+        {"Category": "CX Roadmap Development", "Value": 20},
+        {"Category": "KPI Tracking", "Value": 25},
+        {"Category": "SOP Documentation", "Value": 10},
+        {"Category": "Cross-Functional Collaboration", "Value": 10},
+    ]
+    display_bar_chart("Key Projects and Achievements", projects_data, xlabel="Projects", ylabel="Impact (%)")
 
 # --- Testimonials Section ---
-st.markdown("## 💬 Professional Recommendations")
-testimonials = [
-    {"name": "Darren Prine", "title": "CX Solutions Guru", "comment": "Pete's expertise in AI-driven analytics and predictive modeling has delivered millions in revenue by reducing churn and boosting NPS."},
-    {"name": "Michele Crocker", "title": "Digital Transformation Expert", "comment": "Pete connects people, processes, and technology to drive measurable results. A true leader with a growth mindset."},
-    {"name": "John Jarvis", "title": "VP Client Services", "comment": "Pete builds high-performing teams, identifies issues quickly, and enhances processes for better efficiency."},
-    {"name": "Angela McKenzie", "title": "Surgery Scheduler", "comment": "One of the most supportive and talented leaders I’ve worked under."},
-    {"name": "Shawn Foley", "title": "Healthcare Executive", "comment": "Pete is a consummate professional—great leader with humor and results-driven attitude."},
-    {"name": "Tina M. Martino", "title": "Director, Healogics", "comment": "Pete’s profound knowledge of call center operations and technology sets him apart as a top asset."},
-]
-cols = st.columns(2)
-for i, t in enumerate(testimonials):
-    with cols[i % 2]:
-        st.markdown(f"**{t['name']}** - *{t['title']}*")
-        st.info(f"_{t['comment']}_")
+with tab_testimonials:
+    st.markdown("## 💬 Professional Recommendations")
+    testimonials = [
+        {"name": "Darren Prine", "title": "CX Solutions Guru", "comment": "Pete's expertise in AI-driven analytics and predictive modeling has delivered millions in revenue by reducing churn and boosting NPS."},
+        {"name": "Michele Crocker", "title": "Digital Transformation Expert", "comment": "Pete connects people, processes, and technology to drive measurable results. A true leader with a growth mindset."},
+        {"name": "John Jarvis", "title": "VP Client Services", "comment": "Pete builds high-performing teams, identifies issues quickly, and enhances processes for better efficiency."},
+        {"name": "Angela McKenzie", "title": "Surgery Scheduler", "comment": "One of the most supportive and talented leaders I’ve worked under."},
+        {"name": "Shawn Foley", "title": "Healthcare Executive", "comment": "Pete is a consummate professional—great leader with humor and results-driven attitude."},
+        {"name": "Tina M. Martino", "title": "Director, Healogics", "comment": "Pete’s profound knowledge of call center operations and technology sets him apart as a top asset."},
+    ]
+    cols = st.columns(2)
+    for i, t in enumerate(testimonials):
+        with cols[i % 2]:
+            st.markdown(f"**{t['name']}** - *{t['title']}*")
+            st.info(f"_{t['comment']}_")
 
 # --- Footer ---
 st.markdown("---")
