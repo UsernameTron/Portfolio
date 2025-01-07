@@ -129,6 +129,29 @@ with tab_projects:
     ]
     display_bar_chart("Key Projects and Achievements", projects_data, xlabel="Projects", ylabel="Impact (%)")
 
+    # Custom GPTs Section
+    st.markdown("### 🤖 Custom GPTs")
+    st.write("Explore the following custom GPT projects that showcase innovative AI applications:")
+    
+    # 1. OpenArt AI
+    st.markdown("""
+    **[OpenArt AI](https://chatgpt.com/g/g-67313d9c22c88190b415c70d5e1c0382-image-prompt-generator)**  
+    A stable diffusion prompt generator that uses iterative user questions and answers to optimize outputs.
+    """)
+
+    # 2. GPT Builder
+    st.markdown("""
+    **[GPT Builder](https://chatgpt.com/g/g-673777f64ee08190bdcf4533dea839b6-optimize-your-custom-gpt)**  
+    An OpenAI custom GPT creation tool that leverages meta-prompting, iterative user inputs, and advanced frameworks, including JSON and other prompt engineering techniques.
+    """)
+
+    # 3. Chat GPT Prompt Engineering Assistant
+    st.markdown("""
+    **[Chat GPT Prompt Engineering Assistant](https://chatgpt.com/g/g-2pON2NqCm-guided-gpt-prompting)**  
+    A simplified, guided user experience leveraging best practices in OpenAI prompt engineering, yielding better results on the first attempt.
+    """)
+
+
 # --- Testimonials Section ---
 with tab_testimonials:
     st.markdown("## 💬 Professional Recommendations")
