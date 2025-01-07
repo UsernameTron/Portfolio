@@ -120,23 +120,21 @@ with tab_certifications:
 # --- Key Projects and Achievements Section ---
 with tab_projects:
     st.markdown("## 🏆 Key Projects and Achievements")
-    projects_data = [
-        {"Category": "Feedback System Implementation", "Value": 93},
-        {"Category": "CX Roadmap Development", "Value": 20},
-        {"Category": "KPI Tracking", "Value": 25},
-        {"Category": "SOP Documentation", "Value": 10},
-        {"Category": "Cross-Functional Collaboration", "Value": 10},
-    ]
-    display_bar_chart("Key Projects and Achievements", projects_data, xlabel="Projects", ylabel="Impact (%)")
 
-    # Add Project Image
-    st.markdown("### 📸 Project Highlight: Denial Prediction and Avoidance")
-    try:
-        image_path = os.path.join(os.getcwd(), "Denial Prediction and Avoidance.jpg")  # Use current working directory
-        image = Image.open(image_path)
-        st.image(image, caption="Denial Prediction and Avoidance", use_column_width=True)
-    except Exception as e:
-        st.error(f"Error loading image 'Denial Prediction and Avoidance.jpg': {e}")
+    # Add Project Images
+    st.markdown("### 📸 Project Highlights")
+    project_images = [
+        {"file": "2025 RCM Assistant.jpg", "caption": "2025 RCM Assistant"},
+        {"file": "Denial Prediction and Avoidance.jpg", "caption": "Denial Prediction and Avoidance"}
+    ]
+
+    for project in project_images:
+        try:
+            image_path = os.path.join(os.getcwd(), project["file"])  # Ensure the images are in the same directory
+            image = Image.open(image_path)
+            st.image(image, caption=project["caption"], use_column_width=True)
+        except Exception as e:
+            st.error(f"Error loading image '{project['file']}': {e}")
 
     # Custom GPTs Section
     st.markdown("### 🤖 Custom GPTs")
