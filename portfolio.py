@@ -1,9 +1,9 @@
 import streamlit as st
-from PIL import Image, UnidentifiedImageError  # Ensure this includes UnidentifiedImageError
-from io import BytesIO  # Required for handling binary file data
+from PIL import Image, UnidentifiedImageError  # For handling images
+from io import BytesIO  # For binary data
 import os
-import matplotlib.pyplot as plt
-import pandas as pd
+import matplotlib.pyplot as plt  # For bar charts
+import pandas as pd  # For data processing
 
 # --- Page Configuration ---
 st.set_page_config(page_title="Digital Portfolio | C. Pete Connor", page_icon="🏆", layout="wide")
@@ -108,25 +108,14 @@ with tab_certifications:
 
     # Add Certification Images
     st.markdown("### 📜 Certification Images")
-    image_folder = "/Users/pconnor/StreamlitCertifications"  # Absolute path to certifications folder
-    st.write(f"Debug: Checking access to folder '{image_folder}'")  # Debugging line
-
-    if os.path.exists(image_folder):
-        image_files = [f for f in os.listdir(image_folder) if f.endswith(('.png', '.jpg', '.jpeg'))]
-        if image_files:
-            cols = st.columns(3)  # Create 3 columns for displaying images
-            for i, image_file in enumerate(image_files):
-                with cols[i % 3]:  # Rotate through columns
-                    try:
-                        image_path = os.path.join(image_folder, image_file)
-                        image = Image.open(image_path)
-                        st.image(image, caption=image_file.split('.')[0], use_column_width=True)
-                    except Exception as e:
-                        st.error(f"Error loading image {image_file}: {e}")
-        else:
-            st.warning("No certification images found in the folder.")
-    else:
-        st.error(f"The folder '{image_folder}' does not exist. Please create it and add your images.")
+    image_files = ["1.png", "2.png"]  # Specify your image filenames explicitly
+    for image_file in image_files:
+        try:
+            image_path = os.path.join(os.getcwd(), image_file)  # Use current working directory
+            image = Image.open(image_path)
+            st.image(image, caption=image_file.split('.')[0], use_column_width=True)
+        except Exception as e:
+            st.error(f"Error loading image {image_file}: {e}")
 
 # --- Key Projects and Achievements Section ---
 with tab_projects:
