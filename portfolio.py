@@ -109,6 +109,25 @@ with tab_certifications:
     ]
     display_bar_chart("Certifications by Category", certifications_data, xlabel="Category", ylabel="Certifications Count")
 
+    # Add Certification Images
+    st.markdown("### 📜 Certification Images")
+    image_folder = "/Users/pconnor/Library/CloudStorage/OneDrive-Personal/Streamlit/certifications"  # Absolute path to certifications folder
+
+    if os.path.exists(image_folder):
+        image_files = [f for f in os.listdir(image_folder) if f.endswith(('.png', '.jpg', '.jpeg'))]
+
+        if image_files:
+            cols = st.columns(3)  # Create 3 columns for displaying images
+            for i, image_file in enumerate(image_files):
+                with cols[i % 3]:  # Rotate through columns
+                    image_path = os.path.join(image_folder, image_file)
+                    image = Image.open(image_path)
+                    st.image(image, caption=image_file.split('.')[0], use_column_width=True)
+        else:
+            st.warning("No certification images found in the folder.")
+    else:
+        st.error(f"The folder '{image_folder}' does not exist. Please create it and add your images.")
+
 # --- Key Projects and Achievements Section ---
 with tab_projects:
     st.markdown("## 🏆 Key Projects and Achievements")
