@@ -2,7 +2,6 @@ import streamlit as st
 from PIL import Image, UnidentifiedImageError  # Ensure this includes UnidentifiedImageError
 from io import BytesIO  # Required for handling binary file data
 import os
-import base64
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -89,8 +88,6 @@ with tab_hero:
     st.markdown("---")
     st.subheader("🎧 Listen to a Summary of My Portfolio")
     st.write("Experience a quick audio overview of my career highlights and achievements:")
-
-    # Use the Dropbox streaming link
     dropbox_audio_link = "https://www.dropbox.com/scl/fi/rimzqokmz986bbqzz24p3/Celebrity-Endorsement.mp3?rlkey=6ccxqt2ovtgw9ajeac7fksfai&raw=1"
     st.audio(dropbox_audio_link, format="audio/mp3")
 
@@ -112,17 +109,20 @@ with tab_certifications:
     # Add Certification Images
     st.markdown("### 📜 Certification Images")
     image_folder = "/Users/pconnor/Library/CloudStorage/OneDrive-Personal/Streamlit/certifications"  # Absolute path to certifications folder
+    st.write(f"Debug: Checking access to folder '{image_folder}'")  # Debugging line
 
     if os.path.exists(image_folder):
         image_files = [f for f in os.listdir(image_folder) if f.endswith(('.png', '.jpg', '.jpeg'))]
-
         if image_files:
             cols = st.columns(3)  # Create 3 columns for displaying images
             for i, image_file in enumerate(image_files):
                 with cols[i % 3]:  # Rotate through columns
-                    image_path = os.path.join(image_folder, image_file)
-                    image = Image.open(image_path)
-                    st.image(image, caption=image_file.split('.')[0], use_column_width=True)
+                    try:
+                        image_path = os.path.join(image_folder, image_file)
+                        image = Image.open(image_path)
+                        st.image(image, caption=image_file.split('.')[0], use_column_width=True)
+                    except Exception as e:
+                        st.error(f"Error loading image {image_file}: {e}")
         else:
             st.warning("No certification images found in the folder.")
     else:
