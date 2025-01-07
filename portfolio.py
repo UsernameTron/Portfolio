@@ -108,7 +108,7 @@ with tab_certifications:
 
     # Add Certification Images
     st.markdown("### 📜 Certification Images")
-    image_folder = "/Users/pconnor/Library/CloudStorage/OneDrive-Personal/Streamlit/certifications"  # Absolute path to certifications folder
+    image_folder = "/Users/pconnor/StreamlitCertifications"  # Absolute path to certifications folder
     st.write(f"Debug: Checking access to folder '{image_folder}'")  # Debugging line
 
     if os.path.exists(image_folder):
