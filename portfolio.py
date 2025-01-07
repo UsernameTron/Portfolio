@@ -129,6 +129,15 @@ with tab_projects:
     ]
     display_bar_chart("Key Projects and Achievements", projects_data, xlabel="Projects", ylabel="Impact (%)")
 
+    # Add Project Image
+    st.markdown("### 📸 Project Highlight: Denial Prediction and Avoidance")
+    try:
+        image_path = os.path.join(os.getcwd(), "Denial Prediction and Avoidance.jpg")  # Use current working directory
+        image = Image.open(image_path)
+        st.image(image, caption="Denial Prediction and Avoidance", use_column_width=True)
+    except Exception as e:
+        st.error(f"Error loading image 'Denial Prediction and Avoidance.jpg': {e}")
+
     # Custom GPTs Section
     st.markdown("### 🤖 Custom GPTs")
     st.write("Explore the following custom GPT projects that showcase innovative AI applications:")
