@@ -49,10 +49,12 @@ with tab_hero:
     st.title("C. Pete Connor: Digital Portfolio")
     col1, col2 = st.columns([1, 2])
 
-    # Display YouTube Introduction Video
+    # Display YouTube Introduction Video with Autoplay
     with col1:
         st.markdown("### 🎥 Introduction Video")
-        st.video("https://youtube.com/shorts/ZlEjftMX1qI")
+        # Modify YouTube URL to enable autoplay
+        youtube_autoplay_url = "https://www.youtube.com/embed/ZlEjftMX1qI?autoplay=1"
+        st.video(youtube_autoplay_url)
 
     # Connect with Virtual Agent Section
     with col2:
@@ -82,6 +84,7 @@ with tab_hero:
     st.write("Experience a quick audio overview of my career highlights and achievements:")
     dropbox_audio_link = "https://www.dropbox.com/scl/fi/rimzqokmz986bbqzz24p3/Celebrity-Endorsement.mp3?rlkey=6ccxqt2ovtgw9ajeac7fksfai&raw=1"
     st.audio(dropbox_audio_link, format="audio/mp3")
+
 
 # --- Certifications Section ---
 with tab_certifications:
