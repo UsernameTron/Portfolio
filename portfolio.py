@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt  # For bar charts
 import pandas as pd  # For data processing
 
 # --- Page Configuration ---
-st.set_page_config(page_title="Digital Portfolio | C. Pete Connor", page_icon="\ud83c\udfc6", layout="wide")
+st.set_page_config(page_title="Digital Portfolio | C. Pete Connor", page_icon=None, layout="wide")
 
 # --- File Paths ---
 FILES = {
@@ -14,6 +14,7 @@ FILES = {
     "resume": "cv_cpeteconnor.pdf",           # Root directory
     "audio_summary": "Celebrity Endorsement.mp3"  # Root directory
 }
+
 
 # --- Helper Functions ---
 def load_file(file_path):
