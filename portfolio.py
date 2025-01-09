@@ -35,11 +35,11 @@ with tab_hero:
     st.title("C. Pete Connor: Digital Portfolio")
     col1, col2 = st.columns([1, 2])
 
-    # Display YouTube Introduction Video with Autoplay
+    # Display YouTube Introduction Video
     with col1:
         st.markdown("### Introduction Video")
         youtube_autoplay_url = "https://www.youtube.com/embed/ZlEjftMX1qI?autoplay=1"
-        st.video(youtube_autoplay_url, height=400, width=700)
+        st.video(youtube_autoplay_url)
 
     # Connect with Virtual Agent Section
     with col2:
@@ -73,11 +73,33 @@ with tab_hero:
 # --- Certifications Section ---
 with tab_certifications:
     st.markdown("## Certifications")
+    certifications_data = [
+        {"Category": "AI & Data Science", "Value": 4},
+        {"Category": "Leadership & Management", "Value": 4},
+        {"Category": "Productivity & Personal Development", "Value": 3},
+        {"Category": "Customer Experience", "Value": 1},
+        {"Category": "Technical Skills", "Value": 2},
+        {"Category": "Process Improvement", "Value": 2},
+        {"Category": "Public Speaking", "Value": 1},
+        {"Category": "Public Recognition", "Value": 1},
+    ]
+    df = pd.DataFrame(certifications_data)
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.bar(df["Category"], df["Value"], color="skyblue")
+    ax.set_ylabel("Certifications Count")
+    ax.set_xlabel("Category")
+    ax.set_xticks(range(len(df["Category"])))
+    ax.set_xticklabels(df["Category"], rotation=45, ha="right")
+    ax.grid(axis="y", linestyle="--", alpha=0.6)
+    plt.tight_layout()
+    st.pyplot(fig)
+
+    # Add Certification Images
     st.markdown("### Certification Images")
     image_files = ["1.png", "2.png"]  # Specify your image filenames explicitly
     for image_file in image_files:
         try:
-            image_path = os.path.join(os.getcwd(), image_file)
+            image_path = os.path.join(os.getcwd(), image_file)  # Use current working directory
             image = Image.open(image_path)
             st.image(image, caption=image_file.split('.')[0], use_column_width=True)
         except Exception as e:
@@ -90,22 +112,26 @@ with tab_projects:
     # Project: LinkedIn Job Seeker Tool
     st.markdown("### LinkedIn Job Seeker Tool")
     st.write("""
-    The purpose of this tool is to assist LinkedIn job seekers with little to no coding experience.
+    The purpose of this tool is to assist LinkedIn job seekers with little to no coding experience.  
     It helps:
     - Decompress the overwhelming number of applications by focusing on suitable roles.
     - Avoid ghost jobs and optimize the time spent applying.
     """)
-    st.markdown("[📄 Download LinkedIn Job Seeker Tool Code](Copy%20Paste%20Code.txt)")
+
+    # Hyperlink for File Download
+    st.markdown("[Download LinkedIn Job Seeker Tool Code](Copy%20Paste%20Code.txt)")
 
     # Embed Video Explanation for the Project
     st.markdown("### Explanation Video: Streamlit Highlight of Code and Prompts")
-    video_file = "Streamlit Highlight of Code and Prompts.mp4"
+    video_file = "Streamlit Highlight of Code and Prompts.mp4"  # Ensure this file matches your GitHub repo
     try:
         with open(video_file, "rb") as video:
             video_bytes = video.read()
-            st.video(video_bytes, height=400, width=700)
+            st.video(video_bytes)
     except FileNotFoundError:
         st.error(f"Video file '{video_file}' not found.")
+
+    st.markdown("---")
 
 # --- Other Apps Section ---
 with tab_apps:
