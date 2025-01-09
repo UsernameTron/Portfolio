@@ -49,18 +49,10 @@ with tab_hero:
     st.title("C. Pete Connor: Digital Portfolio")
     col1, col2 = st.columns([1, 2])
 
-    # Display Profile Picture
-    profile_pic_data = load_file(FILES["profile_pic"])
-    if profile_pic_data:
-        with col1:
-            try:
-                profile_pic = Image.open(BytesIO(profile_pic_data))
-                st.image(profile_pic, caption="C. Pete Connor")
-            except UnidentifiedImageError:
-                st.error("Uploaded profile picture is not a valid image file.")
-    else:
-        with col1:
-            st.warning("Profile picture not found.")
+    # Display YouTube Introduction Video
+    with col1:
+        st.markdown("### 🎥 Introduction Video")
+        st.video("https://youtube.com/shorts/ZlEjftMX1qI")
 
     # Connect with Virtual Agent Section
     with col2:
