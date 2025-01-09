@@ -25,20 +25,6 @@ def load_file(file_path):
         st.error(f"File not found: {file_path}")
         return None
 
-def display_bar_chart(title, data, xlabel, ylabel):
-    """Create a horizontal bar chart using matplotlib."""
-    st.markdown(f"### {title}")
-    df = pd.DataFrame(data)
-    fig, ax = plt.subplots(figsize=(10, 5))
-    ax.bar(df["Category"], df["Value"], color="skyblue")
-    ax.set_ylabel(ylabel)
-    ax.set_xlabel(xlabel)
-    ax.set_xticks(range(len(df["Category"])))
-    ax.set_xticklabels(df["Category"], rotation=45, ha="right")
-    ax.grid(axis="y", linestyle="--", alpha=0.6)
-    plt.tight_layout()
-    st.pyplot(fig)
-
 # --- Tabs ---
 tab_hero, tab_certifications, tab_projects, tab_testimonials, tab_apps = st.tabs(
     ["Hero Section", "Certifications", "Key Projects", "Testimonials", "Other Apps"]
@@ -53,7 +39,7 @@ with tab_hero:
     with col1:
         st.markdown("### Introduction Video")
         youtube_autoplay_url = "https://www.youtube.com/embed/ZlEjftMX1qI?autoplay=1"
-        st.video(youtube_autoplay_url)
+        st.video(youtube_autoplay_url, height=400, width=700)
 
     # Connect with Virtual Agent Section
     with col2:
@@ -87,24 +73,11 @@ with tab_hero:
 # --- Certifications Section ---
 with tab_certifications:
     st.markdown("## Certifications")
-    certifications_data = [
-        {"Category": "AI & Data Science", "Value": 4},
-        {"Category": "Leadership & Management", "Value": 4},
-        {"Category": "Productivity & Personal Development", "Value": 3},
-        {"Category": "Customer Experience", "Value": 1},
-        {"Category": "Technical Skills", "Value": 2},
-        {"Category": "Process Improvement", "Value": 2},
-        {"Category": "Public Speaking", "Value": 1},
-        {"Category": "Public Recognition", "Value": 1},
-    ]
-    display_bar_chart("Certifications by Category", certifications_data, xlabel="Category", ylabel="Certifications Count")
-
-    # Add Certification Images
     st.markdown("### Certification Images")
     image_files = ["1.png", "2.png"]  # Specify your image filenames explicitly
     for image_file in image_files:
         try:
-            image_path = os.path.join(os.getcwd(), image_file)  # Use current working directory
+            image_path = os.path.join(os.getcwd(), image_file)
             image = Image.open(image_path)
             st.image(image, caption=image_file.split('.')[0], use_column_width=True)
         except Exception as e:
@@ -121,34 +94,18 @@ with tab_projects:
     It helps:
     - Decompress the overwhelming number of applications by focusing on suitable roles.
     - Avoid ghost jobs and optimize the time spent applying.
-    
-    This project highlights my proactive approach to problem-solving: while others may complain about inefficiencies, I take strategic action to address and solve them.
     """)
+    st.markdown("[📄 Download LinkedIn Job Seeker Tool Code](Copy%20Paste%20Code.txt)")
 
     # Embed Video Explanation for the Project
     st.markdown("### Explanation Video: Streamlit Highlight of Code and Prompts")
-    video_file = "Streamlit Highlight of Code and Prompts.mp4"  # Ensure this file matches your GitHub repo
+    video_file = "Streamlit Highlight of Code and Prompts.mp4"
     try:
         with open(video_file, "rb") as video:
             video_bytes = video.read()
-            st.video(video_bytes)
+            st.video(video_bytes, height=400, width=700)
     except FileNotFoundError:
         st.error(f"Video file '{video_file}' not found.")
-
-    # Add Download Button for the Code
-    code_file = "Copy Paste Code.txt"  # Ensure this matches the file path in your GitHub repo
-    try:
-        with open(code_file, "rb") as file:
-            st.download_button(
-                label="Download Code: LinkedIn Job Seeker Tool",
-                data=file,
-                file_name="LinkedIn_Job_Seeker_Tool.txt",
-                mime="text/plain",
-            )
-    except FileNotFoundError:
-        st.error(f"Code file '{code_file}' not found.")
-
-    st.markdown("---")
 
 # --- Other Apps Section ---
 with tab_apps:
