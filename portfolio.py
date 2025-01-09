@@ -182,4 +182,18 @@ with tab_testimonials:
         {"name": "Michele Crocker", "title": "Digital Transformation Expert", "comment": "Pete connects people, processes, and technology to drive measurable results. A true leader with a growth mindset."},
         {"name": "John Jarvis", "title": "VP Client Services", "comment": "Pete builds high-performing teams, identifies issues quickly, and enhances processes for better efficiency."},
         {"name": "Angela McKenzie", "title": "Surgery Scheduler", "comment": "One of the most supportive and talented leaders I’ve worked under."},
-        {"name": "Shawn Foley", "title": "Healthcare Executive", "comment": "Pete is a consummate professional—great leader with humor and results}
+        {"name": "Shawn Foley", "title": "Healthcare Executive", "comment": "Pete is a consummate professional—great leader with humor and results-driven attitude."},
+        {"name": "Tina M. Martino", "title": "Director, Healogics", "comment": "Pete’s profound knowledge of call center operations and technology sets him apart as a top asset."},
+    ]
+    cols = st.columns(2)
+    for i, t in enumerate(testimonials):
+        with cols[i % 2]:
+            st.markdown(f"**{t['name']}** - *{t['title']}*")
+            st.info(f"_{t['comment']}_")
+
+# --- Footer ---
+st.markdown("---")
+st.markdown("""
+**Let’s connect and discuss how I can drive success for your organization.**  
+*Your future transformation starts here!*
+""")
