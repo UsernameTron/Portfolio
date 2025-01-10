@@ -4,6 +4,7 @@ from io import BytesIO  # For binary data
 import os
 import matplotlib.pyplot as plt  # For bar charts
 import pandas as pd  # For data processing
+import plotly.express as px  # For dynamic visualizations
 
 # --- Page Configuration ---
 st.set_page_config(page_title="Digital Portfolio | C. Pete Connor", page_icon=None, layout="wide")
@@ -25,9 +26,23 @@ def load_file(file_path):
         st.error(f"File not found: {file_path}")
         return None
 
+def display_bar_chart(title, data, xlabel, ylabel):
+    """Create a horizontal bar chart using matplotlib."""
+    st.markdown(f"### {title}")
+    df = pd.DataFrame(data)
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.bar(df["Category"], df["Value"], color="skyblue")
+    ax.set_ylabel(ylabel)
+    ax.set_xlabel(xlabel)
+    ax.set_xticks(range(len(df["Category"])))
+    ax.set_xticklabels(df["Category"], rotation=45, ha="right")
+    ax.grid(axis="y", linestyle="--", alpha=0.6)
+    plt.tight_layout()
+    st.pyplot(fig)
+
 # --- Tabs ---
-tab_hero, tab_certifications, tab_projects, tab_testimonials, tab_apps = st.tabs(
-    ["Hero Section", "Certifications", "Key Projects", "Testimonials", "Other Apps"]
+tab_hero, tab_authentic_ai, tab_projects, tab_testimonials, tab_apps = st.tabs(
+    ["Hero Section", "The Authentic Intelligence Project", "Key Projects", "Testimonials", "Other Apps"]
 )
 
 # --- Hero Section ---
@@ -35,7 +50,7 @@ with tab_hero:
     st.title("C. Pete Connor: Digital Portfolio")
     col1, col2 = st.columns([1, 2])
 
-    # Display YouTube Introduction Video
+    # Display YouTube Introduction Video with Autoplay
     with col1:
         st.markdown("### Introduction Video")
         youtube_autoplay_url = "https://www.youtube.com/embed/ZlEjftMX1qI?autoplay=1"
@@ -70,49 +85,63 @@ with tab_hero:
     dropbox_audio_link = "https://www.dropbox.com/scl/fi/rimzqokmz986bbqzz24p3/Celebrity-Endorsement.mp3?rlkey=6ccxqt2ovtgw9ajeac7fksfai&raw=1"
     st.audio(dropbox_audio_link, format="audio/mp3")
 
-# --- Certifications Section ---
-with tab_certifications:
-    st.markdown("## Certifications")
-    certifications_data = [
-        {"Category": "AI & Data Science", "Value": 4},
-        {"Category": "Leadership & Management", "Value": 4},
-        {"Category": "Productivity & Personal Development", "Value": 3},
-        {"Category": "Customer Experience", "Value": 1},
-        {"Category": "Technical Skills", "Value": 2},
-        {"Category": "Process Improvement", "Value": 2},
-        {"Category": "Public Speaking", "Value": 1},
-        {"Category": "Public Recognition", "Value": 1},
-    ]
-    df = pd.DataFrame(certifications_data)
-    fig, ax = plt.subplots(figsize=(10, 5))
-    ax.bar(df["Category"], df["Value"], color="skyblue")
-    ax.set_ylabel("Certifications Count")
-    ax.set_xlabel("Category")
-    ax.set_xticks(range(len(df["Category"])))
-    ax.set_xticklabels(df["Category"], rotation=45, ha="right")
-    ax.grid(axis="y", linestyle="--", alpha=0.6)
-    plt.tight_layout()
-    st.pyplot(fig)
+# --- The Authentic Intelligence Project ---
+with tab_authentic_ai:
+    st.markdown("## The Authentic Intelligence Project")
+    st.write("""
+    The Authentic Intelligence Project explores innovative approaches to artificial intelligence in customer experience.  
+    By focusing on actionable insights and practical applications, this project highlights the importance of tailoring AI solutions to meet real-world needs.
+    """)
 
-    # Add Certification Images
-    st.markdown("### Certification Images")
-    image_files = ["1.png", "2.png"]  # Specify your image filenames explicitly
-    for image_file in image_files:
-        try:
-            image_path = os.path.join(os.getcwd(), image_file)  # Use current working directory
-            image = Image.open(image_path)
-            st.image(image, caption=image_file.split('.')[0], use_column_width=True)
-        except Exception as e:
-            st.error(f"Error loading image {image_file}: {e}")
+    # Video Selector
+    st.markdown("### Explore Leadership Personas")
+    persona = st.radio(
+        "Select a Persona:",
+        ["Vendor-Driven Leader", "Empathy-Centric Leader", "Authentic Strategist Leader"]
+    )
+
+    if persona == "Vendor-Driven Leader":
+        st.subheader("Vendor-Driven Leader")
+        st.write("""
+        The Vendor-Driven Leader relies heavily on external vendors for quick, pre-packaged solutions.
+        While this approach may deliver speed, it often lacks alignment with long-term goals, leading to inefficiencies and poor outcomes.
+        """)
+        st.video("https://youtu.be/r7lqfRY23Yk")
+
+    elif persona == "Empathy-Centric Leader":
+        st.subheader("Empathy-Centric Leader")
+        st.write("""
+        The Empathy-Centric Leader emphasizes customer loyalty and relationships.
+        However, without AI for scalability, this approach struggles to meet efficiency demands.
+        """)
+        st.video("https://youtu.be/s9r2pVxEjW4")
+
+    elif persona == "Authentic Strategist Leader":
+        st.subheader("Authentic Strategist Leader")
+        st.write("""
+        The Authentic Strategist Leader balances empathy and AI for sustainable success.
+        By aligning AI with business goals, this leader drives efficiency, loyalty, and ROI.
+        """)
+        st.video("https://youtu.be/xLYeEHzfAXw")
+
+    # Insights and Metrics
+    st.markdown("### Insights and Metrics")
+    data = {
+        "Persona": ["Vendor-Driven", "Empathy-Centric", "Authentic Strategist"],
+        "Success Rate (%)": [40, 65, 90]
+    }
+    df = pd.DataFrame(data)
+    fig = px.bar(df, x="Persona", y="Success Rate (%)", title="Leadership Persona Success Rates")
+    st.plotly_chart(fig)
 
 # --- Key Projects and Achievements Section ---
 with tab_projects:
     st.markdown("## Key Projects and Achievements")
 
     # Project: LinkedIn Job Seeker Tool
-    st.markdown("### LinkedIn Job Seeker Tool")
+    st.markdown("### **LinkedIn Job Seeker Tool**")
     st.write("""
-    The purpose of this tool is to assist LinkedIn job seekers with little to no coding experience.  
+    The purpose of this tool is to assist LinkedIn job seekers with little to no coding experience.
     It helps:
     - Decompress the overwhelming number of applications by focusing on suitable roles.
     - Avoid ghost jobs and optimize the time spent applying.
@@ -173,10 +202,3 @@ with tab_testimonials:
         with cols[i % 2]:
             st.markdown(f"**{t['name']}** - *{t['title']}*")
             st.info(f"_{t['comment']}_")
-
-# --- Footer ---
-st.markdown("---")
-st.markdown("""
-**Let’s connect and discuss how I can drive success for your organization.**  
-*Your future transformation starts here!*
-""")
