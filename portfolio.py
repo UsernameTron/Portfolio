@@ -27,8 +27,8 @@ def load_file(file_path):
         return None
 
 # --- Tabs ---
-tab_hero, tab_authentic_ai, tab_projects, tab_testimonials, tab_apps = st.tabs(
-    ["Hero Section", "The Authentic Intelligence Project", "Key Projects", "Testimonials", "Other Apps"]
+tab_hero, tab_projects, tab_testimonials, tab_apps = st.tabs(
+    ["Hero Section", "Key Projects", "Testimonials", "Other Apps"]
 )
 
 # --- Hero Section ---
@@ -70,55 +70,6 @@ with tab_hero:
     st.write("Experience a quick audio overview of my career highlights and achievements:")
     dropbox_audio_link = "https://www.dropbox.com/scl/fi/rimzqokmz986bbqzz24p3/Celebrity-Endorsement.mp3?rlkey=6ccxqt2ovtgw9ajeac7fksfai&raw=1"
     st.audio(dropbox_audio_link, format="audio/mp3")
-
-# --- The Authentic Intelligence Project ---
-with tab_authentic_ai:
-    st.markdown("## The Authentic Intelligence Project")
-    st.write("""
-    The Authentic Intelligence Project explores innovative approaches to artificial intelligence in customer experience.  
-    By focusing on actionable insights and practical applications, this project highlights the importance of tailoring AI solutions to meet real-world needs.
-    """)
-
-    # Video Selector
-    st.markdown("### Explore Leadership Personas")
-    persona = st.radio(
-        "Select a Persona:",
-        ["Vendor-Driven Leader", "Empathy-Centric Leader", "Authentic Strategist Leader"]
-    )
-
-    if persona == "Vendor-Driven Leader":
-        st.subheader("Vendor-Driven Leader")
-        st.write("""
-        The Vendor-Driven Leader relies heavily on external vendors for quick, pre-packaged solutions.
-        While this approach may deliver speed, it often lacks alignment with long-term goals, leading to inefficiencies and poor outcomes.
-        """)
-        st.video("https://www.youtube.com/embed/r7lqfRY23Yk")
-
-    elif persona == "Empathy-Centric Leader":
-        st.subheader("Empathy-Centric Leader")
-        st.write("""
-        The Empathy-Centric Leader emphasizes customer loyalty and relationships.
-        However, without AI for scalability, this approach struggles to meet efficiency demands.
-        """)
-        st.video("https://www.youtube.com/embed/s9r2pVxEjW4")
-
-    elif persona == "Authentic Strategist Leader":
-        st.subheader("Authentic Strategist Leader")
-        st.write("""
-        The Authentic Strategist Leader balances empathy and AI for sustainable success.
-        By aligning AI with business goals, this leader drives efficiency, loyalty, and ROI.
-        """)
-        st.video("https://www.youtube.com/embed/xLYeEHzfAXw")
-
-    # Insights and Metrics
-    st.markdown("### Insights and Metrics")
-    data = {
-        "Persona": ["Vendor-Driven", "Empathy-Centric", "Authentic Strategist"],
-        "Success Rate (%)": [40, 65, 90]
-    }
-    df = pd.DataFrame(data)
-    fig = px.bar(df, x="Persona", y="Success Rate (%)", title="Leadership Persona Success Rates")
-    st.plotly_chart(fig, use_container_width=True)
 
 # --- Key Projects and Achievements Section ---
 with tab_projects:
