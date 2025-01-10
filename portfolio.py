@@ -11,9 +11,9 @@ st.set_page_config(page_title="Digital Portfolio | C. Pete Connor", page_icon=No
 
 # --- File Paths ---
 FILES = {
-    "profile_pic": "profile-pic.png",         # Root directory
-    "resume": "cv_cpeteconnor.pdf",           # Root directory
-    "audio_summary": "Celebrity Endorsement.mp3"  # Root directory
+    "profile_pic": "profile-pic.png",
+    "resume": "cv_cpeteconnor.pdf",
+    "audio_summary": "Celebrity Endorsement.mp3"
 }
 
 # --- Helper Functions ---
@@ -106,7 +106,7 @@ with tab_authentic_ai:
         The Vendor-Driven Leader relies heavily on external vendors for quick, pre-packaged solutions.
         While this approach may deliver speed, it often lacks alignment with long-term goals, leading to inefficiencies and poor outcomes.
         """)
-        st.video("https://youtu.be/r7lqfRY23Yk")
+        st.video("https://youtu.be/r7lqfRY23Yk", width=600, height=340)
 
     elif persona == "Empathy-Centric Leader":
         st.subheader("Empathy-Centric Leader")
@@ -114,7 +114,7 @@ with tab_authentic_ai:
         The Empathy-Centric Leader emphasizes customer loyalty and relationships.
         However, without AI for scalability, this approach struggles to meet efficiency demands.
         """)
-        st.video("https://youtu.be/s9r2pVxEjW4")
+        st.video("https://youtu.be/s9r2pVxEjW4", width=600, height=340)
 
     elif persona == "Authentic Strategist Leader":
         st.subheader("Authentic Strategist Leader")
@@ -122,7 +122,7 @@ with tab_authentic_ai:
         The Authentic Strategist Leader balances empathy and AI for sustainable success.
         By aligning AI with business goals, this leader drives efficiency, loyalty, and ROI.
         """)
-        st.video("https://youtu.be/xLYeEHzfAXw")
+        st.video("https://youtu.be/xLYeEHzfAXw", width=600, height=340)
 
     # Insights and Metrics
     st.markdown("### Insights and Metrics")
@@ -132,7 +132,7 @@ with tab_authentic_ai:
     }
     df = pd.DataFrame(data)
     fig = px.bar(df, x="Persona", y="Success Rate (%)", title="Leadership Persona Success Rates")
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
 # --- Key Projects and Achievements Section ---
 with tab_projects:
@@ -156,7 +156,7 @@ with tab_projects:
     try:
         with open(video_file, "rb") as video:
             video_bytes = video.read()
-            st.video(video_bytes)
+            st.video(video_bytes, width=600, height=340)
     except FileNotFoundError:
         st.error(f"Video file '{video_file}' not found.")
 
