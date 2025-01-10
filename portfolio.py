@@ -12,8 +12,7 @@ st.set_page_config(page_title="Digital Portfolio | C. Pete Connor", page_icon=No
 # --- File Paths ---
 FILES = {
     "profile_pic": "profile-pic.png",
-    "resume": "cv_cpeteconnor.pdf",
-    "audio_summary": "Celebrity Endorsement.mp3"
+    "resume": "cv_cpeteconnor.pdf"
 }
 
 # --- Helper Functions ---
@@ -64,16 +63,9 @@ with tab_hero:
         else:
             st.warning("Resume file not found.")
 
-    # MP3 Audio Section
-    st.markdown("---")
-    st.subheader("Listen to a Summary of My Portfolio")
-    st.write("Experience a quick audio overview of my career highlights and achievements:")
-    dropbox_audio_link = "https://www.dropbox.com/scl/fi/rimzqokmz986bbqzz24p3/Celebrity-Endorsement.mp3?rlkey=6ccxqt2ovtgw9ajeac7fksfai&raw=1"
-    st.audio(dropbox_audio_link, format="audio/mp3")
-
-# --- Key Projects and Achievements Section ---
+# --- Key Projects Section ---
 with tab_projects:
-    st.markdown("## Key Projects and Achievements")
+    st.markdown("## Key Projects")
 
     # Project: LinkedIn Job Seeker Tool
     st.markdown("### **LinkedIn Job Seeker Tool**")
