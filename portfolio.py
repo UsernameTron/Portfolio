@@ -92,7 +92,7 @@ with tab_authentic_ai:
         The Vendor-Driven Leader relies heavily on external vendors for quick, pre-packaged solutions.
         While this approach may deliver speed, it often lacks alignment with long-term goals, leading to inefficiencies and poor outcomes.
         """)
-        st.video("https://www.dropbox.com/scl/fi/nqh7sg9epzyzs7xcia8na/Vendor-Driven-Leader-1.mp4?raw=1")
+        st.video("https://www.youtube.com/embed/r7lqfRY23Yk")
 
     elif persona == "Empathy-Centric Leader":
         st.subheader("Empathy-Centric Leader")
@@ -100,7 +100,7 @@ with tab_authentic_ai:
         The Empathy-Centric Leader emphasizes customer loyalty and relationships.
         However, without AI for scalability, this approach struggles to meet efficiency demands.
         """)
-        st.video("https://www.dropbox.com/scl/fi/jve8p4eao8sdrj0ptjb6y/Empathy-Centric-Leader-1.mp4?raw=1")
+        st.video("https://www.youtube.com/embed/s9r2pVxEjW4")
 
     elif persona == "Authentic Strategist Leader":
         st.subheader("Authentic Strategist Leader")
@@ -108,7 +108,7 @@ with tab_authentic_ai:
         The Authentic Strategist Leader balances empathy and AI for sustainable success.
         By aligning AI with business goals, this leader drives efficiency, loyalty, and ROI.
         """)
-        st.video("https://www.dropbox.com/scl/fi/ngituhxz5o0m3ho16ia6c/Authentic-Strategist-Leader-1.mp4?raw=1")
+        st.video("https://www.youtube.com/embed/xLYeEHzfAXw")
 
     # Insights and Metrics
     st.markdown("### Insights and Metrics")
@@ -147,3 +147,44 @@ with tab_projects:
         st.error(f"Video file '{video_file}' not found.")
 
     st.markdown("---")
+
+# --- Other Apps Section ---
+with tab_apps:
+    st.markdown("## Other Streamlit Apps")
+    st.write("Explore other Streamlit apps I have developed. These tools demonstrate my problem-solving approach and focus on practical, strategic solutions.")
+
+    # App 1: Customer Churn Assessment Tool
+    st.markdown("### Customer Churn Assessment Tool")
+    st.write("""
+    This tool helps organizations analyze customer churn and loyalty logic. By using this app, businesses can identify key drivers 
+    of customer retention and take actionable steps to improve loyalty.
+    """)
+    st.markdown("[Open App](https://customer-churn-loyalty-logic-8tvwyfjvs6cjrmjcs2mndt.streamlit.app/)")
+
+    st.markdown("---")
+
+    # App 2: Technology Readiness Assessment
+    st.markdown("### Technology Readiness Assessment Tool")
+    st.write("""
+    This app provides organizations with a customizable assessment framework to evaluate technology readiness, 
+    avoiding the need for expensive third-party assessments. The methodology is backed by fundamentals from premium 
+    personality assessments, tailored to meet strategic needs.
+    """)
+    st.markdown("[Open App](https://jewfi5agnuff4ecurpuqcy.streamlit.app/)")
+
+# --- Testimonials Section ---
+with tab_testimonials:
+    st.markdown("## Professional Recommendations")
+    testimonials = [
+        {"name": "Darren Prine", "title": "CX Solutions Guru", "comment": "Pete's expertise in AI-driven analytics and predictive modeling has delivered millions in revenue by reducing churn and boosting NPS."},
+        {"name": "Michele Crocker", "title": "Digital Transformation Expert", "comment": "Pete connects people, processes, and technology to drive measurable results. A true leader with a growth mindset."},
+        {"name": "John Jarvis", "title": "VP Client Services", "comment": "Pete builds high-performing teams, identifies issues quickly, and enhances processes for better efficiency."},
+        {"name": "Angela McKenzie", "title": "Surgery Scheduler", "comment": "One of the most supportive and talented leaders I’ve worked under."},
+        {"name": "Shawn Foley", "title": "Healthcare Executive", "comment": "Pete is a consummate professional—great leader with humor and results-driven attitude."},
+        {"name": "Tina M. Martino", "title": "Director, Healogics", "comment": "Pete’s profound knowledge of call center operations and technology sets him apart as a top asset."},
+    ]
+    cols = st.columns(2)
+    for i, t in enumerate(testimonials):
+        with cols[i % 2]:
+            st.markdown(f"**{t['name']}** - *{t['title']}*")
+            st.info(f"_{t['comment']}_")
