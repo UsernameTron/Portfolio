@@ -109,8 +109,8 @@ with tab_projects:
     - **Compliance**: Ensure adherence to the latest payer rules and minimize audit risks.
 
     **Access the Case Studies:**
-    - [Case Study: ML in Healthcare ROI in Days, Not Weeks](https://github.com/UsernameTron/Portfolio/blob/08a75b219a60adc328f934ca4bb5818ad13aeebd/Case%20Study%20ML%20in%20Healthcare%20ROI%20in%20days%20not%20weeks.pdf)
-    - [RCM Automation and Prediction Model](https://github.com/UsernameTron/Portfolio/blob/08a75b219a60adc328f934ca4bb5818ad13aeebd/RCM%20Automation%20and%20Prediction%20Model.pdf)
+    - [Case Study: ML in Healthcare ROI in Days, Not Weeks](https://drive.google.com/file/d/18EE635Yf-qCsfzbK1gDnX7pe5YE4hnmw/view?usp=drive_link)
+    - [RCM Automation and Prediction Model](https://drive.google.com/file/d/1MJ08YGgEP4I4LJm-xEf_Fw1U8Y_QLjMg/view?usp=drive_link)
 
     **Conclusion:**  
     This project demonstrates the transformative potential of predictive analytics and machine learning in healthcare, delivering measurable ROI in days, not weeks. By addressing inefficiencies and enabling data-driven decision-making, healthcare organizations can improve patient outcomes while optimizing financial performance.
