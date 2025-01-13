@@ -91,6 +91,40 @@ with tab_projects:
 
     st.markdown("---")
 
+    # Integrated Predictive Analytics for Healthcare ROI
+    st.markdown("### **Integrated Predictive Analytics for Healthcare ROI**")
+    st.write("""
+    The healthcare industry often faces challenges in managing claim denials, ensuring compliance, and optimizing operational efficiency. This project introduces a comprehensive **predictive analytics and machine learning solution** tailored to healthcare organizations, focusing on:
+    - **Sentiment Analysis**: Gaining insights from patient and staff interactions to identify areas for improvement.
+    - **Predictive Analytics**: Forecasting claim denials based on historical trends, payer rules, and specific claim attributes.
+    - **Machine Learning Models**: Delivering actionable insights to mitigate risks and improve decision-making.
+
+    **Project Highlights:**
+    1. **Sentiment Analysis**:
+       - Understand patient feedback to enhance service delivery and identify dissatisfaction trends.
+       - Improve communication strategies and patient satisfaction scores.
+    2. **Predictive Denial Management**:
+       - Identify high-risk claims before submission using historical denial patterns and advanced classification models.
+       - Proactively resolve issues such as missing documentation, non-compliant CPT codes, and preauthorization gaps.
+    3. **Revenue Optimization through Automation**:
+       - Automate tedious tasks like payer-specific denial analysis and eligibility checks.
+       - Free up staff for patient-centric activities while accelerating reimbursement cycles.
+
+    **Outcomes and Benefits:**
+    - **Financial Impact**: Reduce denial rates by up to 20%, resulting in immediate ROI and faster reimbursements.
+    - **Operational Efficiency**: Free up administrative resources by automating 50% of manual tasks.
+    - **Compliance**: Ensure adherence to the latest payer rules and minimize audit risks.
+
+    **Access the Case Studies:**
+    - [Case Study: ML in Healthcare ROI in Days, Not Weeks](https://github.com/your-repo/Case-Study-ML-in-Healthcare-ROI.pdf)
+    - [RCM Automation and Prediction Model](https://github.com/your-repo/RCM-Automation-and-Prediction-Model.pdf)
+
+    **Conclusion:**  
+    This project demonstrates the transformative potential of predictive analytics and machine learning in healthcare, delivering measurable ROI in days, not weeks. By addressing inefficiencies and enabling data-driven decision-making, healthcare organizations can improve patient outcomes while optimizing financial performance.
+    """)
+
+    st.markdown("---")
+
 # --- Other Apps Section ---
 with tab_apps:
     st.markdown("## Other Streamlit Apps")
