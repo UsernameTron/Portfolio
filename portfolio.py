@@ -79,15 +79,8 @@ with tab_projects:
     # Hyperlink for File Download
     st.markdown("[Download LinkedIn Job Seeker Tool Code](Copy%20Paste%20Code.txt)")
 
-    # Embed Video Explanation for the Project
-    st.markdown("### Explanation Video: Streamlit Highlight of Code and Prompts")
-    video_file = "Streamlit Highlight of Code and Prompts.mp4"  # Ensure this file matches your GitHub repo
-    try:
-        with open(video_file, "rb") as video:
-            video_bytes = video.read()
-            st.video(video_bytes)
-    except FileNotFoundError:
-        st.error(f"Video file '{video_file}' not found.")
+    # Link to Video Explanation for the Project
+    st.markdown("[Watch Explanation Video: Streamlit Highlight of Code and Prompts](https://www.youtube.com/embed/ZlEjftMX1qI)")
 
     st.markdown("---")
 
